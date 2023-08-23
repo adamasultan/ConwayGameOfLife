@@ -1,6 +1,6 @@
 import pygame
 class Gui():
-    def __init__(self, game_logic, width, height, cell_size, grid_width, grid_height, on_exit_press, on_cell_press):
+    def __init__(self, game_logic, width, height, cell_size, grid_width, grid_height, on_exit_press, on_cell_press, on_next_gen_press):
         self.game_logic = game_logic
         self.width=  width
         self.height = height
@@ -9,6 +9,7 @@ class Gui():
         self.grid_height = grid_height
         self.on_exit_press = on_exit_press
         self.on_cell_press = on_cell_press
+        self.on_next_gen_press = on_next_gen_press
         self.RED = (255, 64, 64)
         self.BLACK = (0, 0, 0)
         self.GREEN = (0, 100, 0)
@@ -27,6 +28,15 @@ class Gui():
         for col in range(self.grid_width):
             pygame.draw.lines(self.screen, color, True, ((col*self.cell_size, 0), (col*self.cell_size, self.height)),1)
 
+    def update_grid(self):
+        #self.screen.fill(self.RED)
+        for row in range(self.grid_height):
+            for col in range(self.grid_width):
+                if self.game_logic.is_alive(row,col):
+                    self.draw_rect(self.GREEN, row, col)
+                else:
+                    self.draw_rect(self.RED, row, col)
+
     def update_cell(self, row, col):
         if self.game_logic.is_alive(row,col):
             self.draw_rect(self.GREEN, row, col)
@@ -44,8 +54,10 @@ class Gui():
                 row = y//self.cell_size
                 col = x//self.cell_size
                 self.on_cell_press(row, col)
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_q:
+                    self.on_next_gen_press()
                 
-
     def update(self):
 
         self.draw_grid(self.BLACK)

@@ -6,7 +6,7 @@ class Game():
         grid_width = width // cell_size
         grid_height = height // cell_size
         self.game_logic = GameLogic(grid_width, grid_height)
-        self.display = Gui(self.game_logic,width, height, cell_size, grid_width, grid_height, self.on_exit_press, self.on_cell_press)
+        self.display = Gui(self.game_logic,width, height, cell_size, grid_width, grid_height, self.on_exit_press, self.on_cell_press, self.on_next_gen_press)
         self.running = False
 
     def start_game(self):
@@ -15,6 +15,9 @@ class Game():
             self.display.handle_user_input()
             self.display.update()
         self.display.quit()
+    def on_next_gen_press(self):
+        self.game_logic.sequence()
+        self.display.update_grid()
 
     def on_exit_press(self):
         self.running = False
@@ -22,7 +25,7 @@ class Game():
         row, col = args
         self.game_logic.change_state(row, col)
         self.display.update_cell(row,col)
-        print(self.game_logic.state[row][col])
+        #print(self.game_logic.state[row][col])
 
 game = Game(800, 600, 40)
 game.start_game()
