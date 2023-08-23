@@ -1,7 +1,7 @@
 from gamelogic import GameLogic
 from gui import Gui
 class Game():
-    def __init__(self, width, height, cell_size):
+    def __init__(self, width = 800, height = 600, cell_size = 40):
         grid_width = width // cell_size
         grid_height = height // cell_size
         self.game_logic = GameLogic(grid_width, grid_height)
@@ -26,5 +26,5 @@ class Game():
         self.display.update_cell(row,col)
         #print(self.game_logic.state[row][col])
 
-game = Game(800, 600, 40)
+game = Game()
 game.start_game()
