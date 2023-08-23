@@ -17,12 +17,12 @@ class Gui():
         pygame.init()
         pygame.display.set_caption("Conway's Game of Life")
         self.screen.fill(self.RED)
-        self.draw_grid(self.BLACK)
+        self.__draw_grid(self.BLACK)
 
-    def draw_rect(self,color, row, col):
+    def __draw_rect(self,color, row, col):
         pygame.draw.rect(self.screen, color, (col*self.cell_size, row*self.cell_size, self.cell_size, self.cell_size))
 
-    def draw_grid(self, color):
+    def __draw_grid(self, color):
         for row in range(self.grid_height):
             pygame.draw.lines(self.screen, color, True, ((0, row*self.cell_size), (self.width, row*self.cell_size)),1)
         for col in range(self.grid_width):
@@ -33,15 +33,15 @@ class Gui():
         for row in range(self.grid_height):
             for col in range(self.grid_width):
                 if self.game_logic.is_alive(row,col):
-                    self.draw_rect(self.GREEN, row, col)
+                    self.__draw_rect(self.GREEN, row, col)
                 else:
-                    self.draw_rect(self.RED, row, col)
+                    self.__draw_rect(self.RED, row, col)
 
     def update_cell(self, row, col):
         if self.game_logic.is_alive(row,col):
-            self.draw_rect(self.GREEN, row, col)
+            self.__draw_rect(self.GREEN, row, col)
         else:
-            self.draw_rect(self.RED, row, col)
+            self.__draw_rect(self.RED, row, col)
 
     def handle_user_input(self):
         for event in pygame.event.get():
@@ -60,7 +60,7 @@ class Gui():
                 
     def update(self):
 
-        self.draw_grid(self.BLACK)
+        self.__draw_grid(self.BLACK)
         pygame.display.flip()
     
     
