@@ -5,9 +5,8 @@ class Game():
     def __init__(self, width, height, cell_size):
         grid_width = width // cell_size
         grid_height = height // cell_size
-        gamestate = GameState(grid_width, grid_height)
-        self.game_logic = GameLogic(gamestate)
-        self.display = Gui(gamestate,width, height, cell_size, grid_width, grid_height, self.on_exit_press)
+        self.game_logic = GameLogic(grid_width, grid_height)
+        self.display = Gui(self.game_logic,width, height, cell_size, grid_width, grid_height, self.on_exit_press, self.on_cell_press)
         self.running = False
 
     def start_game(self):
@@ -19,5 +18,11 @@ class Game():
 
     def on_exit_press(self):
         self.running = False
+    def on_cell_press(self, *args):
+        row, col = args
+        self.game_logic.change_state(row, col)
+        self.display.update_cell(row,col)
+        print(self.game_logic.state[row][col])
+
 game = Game(800, 600, 40)
 game.start_game()
