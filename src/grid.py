@@ -47,7 +47,7 @@ class Grid():
         while running:
             #pygame.draw.rect(screen, (0,0,0), (col*cell_size, row*cell_size, cell_size, cell_size), 1)
             for event in pygame.event.get():
-                # check if the current event is quiting the window
+                # check if the curreznt event is quiting the window
                 if event.type == pygame.QUIT:
                     running = False
                 if event.type == pygame.KEYDOWN:
@@ -57,7 +57,7 @@ class Grid():
                         game.sequence()
                         #print(self.grid)
                         self.update_grid()
-                        self.draw_grid(self.BLACK)
+                        #self.draw_grid(self.BLACK)
                         #pygame.display.flip()
                 # check of the current event is a click
                 elif event.type == pygame.MOUSEBUTTONDOWN:
