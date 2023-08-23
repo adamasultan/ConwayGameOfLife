@@ -1,6 +1,5 @@
 from gamelogic import GameLogic
 from gui import Gui
-from gamestate import GameState
 class Game():
     def __init__(self, width, height, cell_size):
         grid_width = width // cell_size
