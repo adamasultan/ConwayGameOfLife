@@ -18,6 +18,9 @@ class Gui():
         self.GREY = (169, 169, 169)
         self.screen = pygame.display.set_mode((self.width, self.height+self.height*0.25))
         pygame.init()
+        self.start_text_font = pygame.font.SysFont("Arial", int(self.cell_size))
+        self.reset_text_font = pygame.font.SysFont("Arial", int(0.75*self.cell_size))
+        self.stop_and_next_text_font = pygame.font.SysFont("Arial", int(0.55*self.cell_size))
         pygame.display.set_caption("Conway's Game of Life")
         self.screen.fill(self.RED)
         self.__draw_grid(self.BLACK)
@@ -29,9 +32,13 @@ class Gui():
 
     def __draw_buttons(self):
         pygame.draw.rect(self.screen, self.GREEN, ((0.4*self.width, self.height+self.height*0.05), (4*self.cell_size, 2*self.cell_size)))
+        self.draw_text("Start", self.start_text_font, (0,0,0), 0.46*self.width, self.height+self.height*0.08)
         pygame.draw.rect(self.screen, self.GREEN, ((0.15*self.width, self.height+self.height*0.075), (2.5*self.cell_size, 1.5*self.cell_size)))
+        self.draw_text("Reset", self.reset_text_font, (0,0,0), 0.17*self.width, self.height+self.height*0.09)
         pygame.draw.rect(self.screen, self.RED, ((0.65*self.width, self.height+self.height*0.1), (2*self.cell_size, self.cell_size)))
+        self.draw_text("Stop", self.stop_and_next_text_font, (0,0,0), 0.68*self.width, self.height+self.height*0.11)
         pygame.draw.rect(self.screen, self.GREEN, ((0.82*self.width, self.height+self.height*0.1), (2*self.cell_size, self.cell_size)))
+        self.draw_text("Next", self.stop_and_next_text_font, (0,0,0), 0.85*self.width, self.height+self.height*0.11)
     def __draw_grid(self, color):
         for row in range(self.grid_height+1):
             pygame.draw.lines(self.screen, color, True, ((0, row*self.cell_size), (self.width, row*self.cell_size)),1)
@@ -90,6 +97,14 @@ class Gui():
                                 z,z1 = pygame.mouse.get_pos()
                                 if self.__in_stop_button_range(z,z1):
                                     started = False
+                                if self.__in_reset_button_range(z,z1):
+                                    started = False
+                                    self.on_reset()
+                                # if self.__in_next_button_range(z,z1):
+                                #     self.on_next_gen_press()
+                            if event.type == pygame.QUIT:
+                                started = False
+                                self.on_exit_press()
                     
                     #print('clicked start')
                 if self.__in_reset_button_range(x,y):
@@ -107,6 +122,9 @@ class Gui():
         self.__draw_grid(self.BLACK)
         pygame.display.flip()
     
-    
+    def draw_text(self,text,font,text_col,x,y):
+        img = font.render(text,True,text_col)
+        self.screen.blit(img, (x,y))
+
     def quit(self):
         pygame.quit()
