@@ -13,12 +13,13 @@ class Gui():
         self.RED = (255, 64, 64)
         self.BLACK = (0, 0, 0)
         self.GREEN = (0, 100, 0)
+        self.GREY = (169, 169, 169)
         self.screen = pygame.display.set_mode((self.width, self.height+self.height*0.25))
         pygame.init()
         pygame.display.set_caption("Conway's Game of Life")
         self.screen.fill(self.RED)
         self.__draw_grid(self.BLACK)
-        pygame.draw.rect(self.screen, self.BLACK, ((0,self.height),(self.width, self.height)))
+        pygame.draw.rect(self.screen, self.GREY, ((0,self.height),(self.width, self.height)))
 
     def __draw_rect(self,color, row, col):
         pygame.draw.rect(self.screen, color, (col*self.cell_size, row*self.cell_size, self.cell_size, self.cell_size))
@@ -51,11 +52,12 @@ class Gui():
                 self.on_exit_press()
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 x, y = pygame.mouse.get_pos()
-                    # find each row and column that has that specific mouse click
-                    # finds specific squqare
-                row = y//self.cell_size
-                col = x//self.cell_size
-                self.on_cell_press(row, col)
+                if x <= self.width and y<= self.height:
+                        # find each row and column that has that specific mouse click
+                        # finds specific squqare
+                    row = y//self.cell_size
+                    col = x//self.cell_size
+                    self.on_cell_press(row, col)
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
                     self.on_next_gen_press()
