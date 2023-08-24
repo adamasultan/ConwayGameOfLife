@@ -20,10 +20,16 @@ class Gui():
         self.screen.fill(self.RED)
         self.__draw_grid(self.BLACK)
         pygame.draw.rect(self.screen, self.GREY, ((0,self.height),(self.width, self.height)))
+        self.__draw_buttons()
 
     def __draw_rect(self,color, row, col):
         pygame.draw.rect(self.screen, color, (col*self.cell_size, row*self.cell_size, self.cell_size, self.cell_size))
 
+    def __draw_buttons(self):
+        pygame.draw.rect(self.screen, self.GREEN, ((0.4*self.width, self.height+self.height*0.05), (4*self.cell_size, 2*self.cell_size)))
+        pygame.draw.rect(self.screen, self.GREEN, ((0.15*self.width, self.height+self.height*0.075), (2.5*self.cell_size, 1.5*self.cell_size)))
+        pygame.draw.rect(self.screen, self.RED, ((0.65*self.width, self.height+self.height*0.1), (2*self.cell_size, self.cell_size)))
+        pygame.draw.rect(self.screen, self.GREEN, ((0.82*self.width, self.height+self.height*0.1), (2*self.cell_size, self.cell_size)))
     def __draw_grid(self, color):
         for row in range(self.grid_height+1):
             pygame.draw.lines(self.screen, color, True, ((0, row*self.cell_size), (self.width, row*self.cell_size)),1)
