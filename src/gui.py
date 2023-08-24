@@ -18,6 +18,7 @@ class Gui():
         pygame.display.set_caption("Conway's Game of Life")
         self.screen.fill(self.RED)
         self.__draw_grid(self.BLACK)
+        pygame.draw.rect(self.screen, self.BLACK, ((0,self.height),(self.width, self.height)))
 
     def __draw_rect(self,color, row, col):
         pygame.draw.rect(self.screen, color, (col*self.cell_size, row*self.cell_size, self.cell_size, self.cell_size))
@@ -27,6 +28,7 @@ class Gui():
             pygame.draw.lines(self.screen, color, True, ((0, row*self.cell_size), (self.width, row*self.cell_size)),1)
         for col in range(self.grid_width+1):
             pygame.draw.lines(self.screen, color, True, ((col*self.cell_size, 0), (col*self.cell_size, self.height)),1)
+    
 
     def update_grid(self):
         #self.screen.fill(self.RED)

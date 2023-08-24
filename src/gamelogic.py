@@ -17,137 +17,137 @@ class GameLogic():
     def sequence(self):
         def count_alives(row, col, alives = 0) -> int:
             if col == 0 and row == 0:
-                if self.state[row+1][col]:
+                if self.is_alive(row+1,col):
                     alives+=1
                 
-                if self.state[row][col+1]:
+                if self.is_alive(row,col+1):
                     alives+=1
                 
-                if self.state[row+1][col+1]:
+                if self.is_alive(row+1,col+1):
                     alives+=1
                 
 
             elif col == 0 and row == self.grid_height-1:
-                if self.state[row-1][col]:
+                if self.is_alive(row-1,col):
                     alives+=1
                 
-                if self.state[row][col+1]:
+                if self.is_alive(row,col+1):
                     alives+=1
                 
-                if self.state[row-1][col+1]:
+                if self.is_alive(row-1, col+1):
                     alives+=1
                 
                     
             elif col == self.grid_width-1 and row == 0:
-                if self.state[row+1][col]:
+                if self.is_alive(row+1, col):
                     alives+=1
                 
-                if self.state[row][col-1]:
+                if self.is_alive(row, col-1):
                     alives+=1
                 
-                if self.state[row+1][col-1]:
+                if self.is_alive(row+1,col-1):
                     alives+=1
                 
 
             elif col == self.grid_width-1 and row == self.grid_height-1:
-                if self.state[row-1][col]:
+                if self.is_alive(row-1,col):
                     alives+=1
                 
-                if self.state[row][col-1]:
+                if self.is_alive(row,col-1):
                     alives+=1
                 
-                if self.state[row-1][col-1]:
+                if self.is_alive(row-1,col-1):
                     alives+=1
                 
                         # note to future, this is chekcing for squares ar col 0
             elif col == 0:
-                if self.state[row+1][col]:
+                if self.is_alive(row+1,col):
                     alives+=1
                 
-                if self.state[row-1][col]:
+                if self.is_alive(row-1,col):
                     alives+=1
                 
-                if self.state[row][col+1]:
+                if self.is_alive(row,col+1):
                     alives+=1
                 
-                if self.state[row+1][col+1]:
+                if self.is_alive(row+1,col+1):
                     alives+=1
                 
-                if self.state[row-1][col+1]:
+                if self.is_alive(row-1,col+1):
                     alives+=1
                 
             elif col == self.grid_width -1:
-                if self.state[row+1][col]:
+                if self.is_alive(row+1,col):
                     alives+=1
                 
-                if self.state[row-1][col]:
+                if self.is_alive(row-1,col):
                     alives+=1
                 
-                if self.state[row][col-1]:
+                if self.is_alive(row,col-1):
                     alives+=1
                 
-                if self.state[row+1][col-1]:
+                if self.is_alive(row+1,col-1):
                     alives+=1
                 
-                if self.state[row-1][col-1]:
+                if self.is_alive(row-1,col-1):
                     alives+=1
                 
             elif row == 0:
-                if self.state[row+1][col]:
+                if self.is_alive(row+1,col):
                     alives+=1
                 
-                if self.state[row][col-1]:
+                if self.is_alive(row,col-1):
                     alives+=1
                 
-                if self.state[row+1][col-1]:
+                if self.is_alive(row+1,col-1):
                     alives+=1
                 
-                if self.state[row][col+1]:
+                if self.is_alive(row,col+1):
                     alives+=1
                 
-                if self.state[row+1][col+1]:
+                if self.is_alive(row+1,col+1):
                     alives+=1
                 
             elif row == self.grid_height -1:
-                if self.state[row-1][col]:
+                if self.is_alive(row-1,col):
                     alives+=1
                 
-                if self.state[row][col-1]:
+                if self.is_alive(row,col-1):
                     alives+=1
                 
-                if self.state[row-1][col-1]:
+                if self.is_alive(row-1,col-1):
                     alives+=1
                 
-                if self.state[row][col+1]:
+                if self.is_alive(row,col+1):
                     alives+=1
                 
-                if self.state[row-1][col+1]:
+                if self.is_alive(row-1,col+1):
                     alives+=1
                 
             #start of general surrounding comparison
             else:
-                if self.state[row+1][col]:
+                if self.is_alive(row+1,col):
                     alives+=1
                 
-                if self.state[row-1][col]:
+                if self.is_alive(row-1,col):
                     alives+=1
                 
-                if self.state[row][col-1]:
+                if self.is_alive(row,col-1):
                     alives+=1
                 
-                if self.state[row+1][col-1]:
+                if self.is_alive(row+1,col-1):
                     alives+=1
                 
-                if self.state[row-1][col-1]:
+                if self.is_alive(row-1,col-1):
                     alives+=1
                 
-                if self.state[row][col+1]:
+                if self.is_alive(row,col+1):
                     alives+=1
                 
-                if self.state[row+1][col+1]:
+                if self.is_alive(row+1,col+1):
                     alives+=1
                 
-                if self.state[row-1][col+1]:
+                if self.is_alive(row-1,col+1):
                     alives+=1
                 
             return alives
