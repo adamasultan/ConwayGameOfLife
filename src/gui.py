@@ -13,7 +13,7 @@ class Gui():
         self.RED = (255, 64, 64)
         self.BLACK = (0, 0, 0)
         self.GREEN = (0, 100, 0)
-        self.screen = pygame.display.set_mode((self.width, self.height))
+        self.screen = pygame.display.set_mode((self.width, self.height+self.height*0.25))
         pygame.init()
         pygame.display.set_caption("Conway's Game of Life")
         self.screen.fill(self.RED)
@@ -23,9 +23,9 @@ class Gui():
         pygame.draw.rect(self.screen, color, (col*self.cell_size, row*self.cell_size, self.cell_size, self.cell_size))
 
     def __draw_grid(self, color):
-        for row in range(self.grid_height):
+        for row in range(self.grid_height+1):
             pygame.draw.lines(self.screen, color, True, ((0, row*self.cell_size), (self.width, row*self.cell_size)),1)
-        for col in range(self.grid_width):
+        for col in range(self.grid_width+1):
             pygame.draw.lines(self.screen, color, True, ((col*self.cell_size, 0), (col*self.cell_size, self.height)),1)
 
     def update_grid(self):
