@@ -26,5 +26,5 @@ class Game():
         self.display.update_cell(row,col)
         #print(self.game_logic.state[row][col])
 
-game = Game()
+game = Game(400, 300, 20)
 game.start_game()

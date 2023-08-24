@@ -36,7 +36,16 @@ class Gui():
         for col in range(self.grid_width+1):
             pygame.draw.lines(self.screen, color, True, ((col*self.cell_size, 0), (col*self.cell_size, self.height)),1)
     
-
+    def __in_grid_range(self,x,y):
+        return x <= self.width and y<= self.height  
+    def __in_start_button_range(self,x,y):
+        return x>= 0.4*self.width and x <= 0.4*self.width+4*self.cell_size and y>= self.height+self.height*0.05 and y <= self.height+self.height*0.05+2*self.cell_size
+    def __in_stop_button_range(self,x,y):
+        return x>=0.65*self.width and x<=0.65*self.width+2*self.cell_size and y>=self.height+self.height*0.1 and y<=self.height+self.height*0.1 + self.cell_size
+    def __in_reset_button_range(self,x,y):
+        return x>= 0.15*self.width and x<= 0.15*self.width+2.5*self.cell_size and y>= self.height+self.height*0.075 and y <= self.height+self.height*0.075+1.5*self.cell_size
+    def __in_next_button_range(self,x,y):
+        return x>=0.82*self.width and x<=0.82*self.width+2*self.cell_size and y>=self.height+self.height*0.1 and y <= self.height+self.height*0.1+ self.cell_size
     def update_grid(self):
         #self.screen.fill(self.RED)
         for row in range(self.grid_height):
@@ -58,12 +67,20 @@ class Gui():
                 self.on_exit_press()
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 x, y = pygame.mouse.get_pos()
-                if x <= self.width and y<= self.height:
+                if self.__in_grid_range(x,y):
                         # find each row and column that has that specific mouse click
                         # finds specific squqare
                     row = y//self.cell_size
                     col = x//self.cell_size
                     self.on_cell_press(row, col)
+                if self.__in_start_button_range(x,y):
+                    print('clicked start')
+                if self.__in_reset_button_range(x,y):
+                    print('clicked reset')
+                if self.__in_stop_button_range(x,y):
+                    print('clicked stop')
+                if self.__in_next_button_range(x,y):
+                    self.on_next_gen_press()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_q:
                     self.on_next_gen_press()
