@@ -1,6 +1,7 @@
 import pygame
+import time
 class Gui():
-    def __init__(self, game_logic, width, height, cell_size, grid_width, grid_height, on_exit_press, on_cell_press, on_next_gen_press):
+    def __init__(self, game_logic, width, height, cell_size, grid_width, grid_height, on_exit_press, on_cell_press, on_next_gen_press, on_reset):
         self.game_logic = game_logic
         self.width=  width
         self.height = height
@@ -10,6 +11,7 @@ class Gui():
         self.on_exit_press = on_exit_press
         self.on_cell_press = on_cell_press
         self.on_next_gen_press = on_next_gen_press
+        self.on_reset = on_reset
         self.RED = (255, 64, 64)
         self.BLACK = (0, 0, 0)
         self.GREEN = (0, 100, 0)
@@ -46,6 +48,10 @@ class Gui():
         return x>= 0.15*self.width and x<= 0.15*self.width+2.5*self.cell_size and y>= self.height+self.height*0.075 and y <= self.height+self.height*0.075+1.5*self.cell_size
     def __in_next_button_range(self,x,y):
         return x>=0.82*self.width and x<=0.82*self.width+2*self.cell_size and y>=self.height+self.height*0.1 and y <= self.height+self.height*0.1+ self.cell_size
+    def reset_grid(self):
+        for row in range(self.grid_height):
+            for col in range(self.grid_width):
+                self.__draw_rect(self.RED, row, col)
     def update_grid(self):
         #self.screen.fill(self.RED)
         for row in range(self.grid_height):
@@ -74,11 +80,22 @@ class Gui():
                     col = x//self.cell_size
                     self.on_cell_press(row, col)
                 if self.__in_start_button_range(x,y):
-                    print('clicked start')
+                    started = True
+                    while started:
+                        self.on_next_gen_press()
+                        self.update()
+                        time.sleep(0.5)
+                        for event in pygame.event.get():
+                            if event.type == pygame.MOUSEBUTTONDOWN:
+                                z,z1 = pygame.mouse.get_pos()
+                                if self.__in_stop_button_range(z,z1):
+                                    started = False
+                    
+                    #print('clicked start')
                 if self.__in_reset_button_range(x,y):
-                    print('clicked reset')
-                if self.__in_stop_button_range(x,y):
-                    print('clicked stop')
+                    self.on_reset()
+                # if self.__in_stop_button_range(x,y):
+                #     print('clicked stop')
                 if self.__in_next_button_range(x,y):
                     self.on_next_gen_press()
             if event.type == pygame.KEYDOWN:
