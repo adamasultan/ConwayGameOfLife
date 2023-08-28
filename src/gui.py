@@ -43,8 +43,8 @@ class Gui():
         pygame.draw.rect(self.screen, self.RED, ((0.4*self.width, self.height+self.height*0.05), (4*self.cell_size, 2*self.cell_size)))
         self.draw_text("Stop", self.start_text_font, (0,0,0), 0.46*self.width, self.height+self.height*0.08)
     def __draw_next(self):
-        pygame.draw.rect(self.screen, self.GREEN, ((0.82*self.width, self.height+self.height*0.1), (2*self.cell_size, self.cell_size)))
-        self.draw_text("Next", self.stop_and_next_text_font, (0,0,0), 0.85*self.width, self.height+self.height*0.11)
+        pygame.draw.rect(self.screen, self.GREEN, ((0.75*self.width, self.height+self.height*0.075), (2.5*self.cell_size, 1.5*self.cell_size)))
+        self.draw_text("Next", self.reset_text_font, (0,0,0), 0.78*self.width, self.height+self.height*0.09)
     def __draw_grid(self, color):
         for row in range(self.grid_height+1):
             pygame.draw.lines(self.screen, color, True, ((0, row*self.cell_size), (self.width, row*self.cell_size)),1)
