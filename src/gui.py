@@ -60,7 +60,7 @@ class Gui():
     def __in_reset_button_range(self,x,y):
         return x>= 0.15*self.width and x<= 0.15*self.width+2.5*self.cell_size and y>= self.height+self.height*0.075 and y <= self.height+self.height*0.075+1.5*self.cell_size
     def __in_next_button_range(self,x,y):
-        return x>=0.82*self.width and x<=0.82*self.width+2*self.cell_size and y>=self.height+self.height*0.1 and y <= self.height+self.height*0.1+ self.cell_size
+        return x>=0.75*self.width and x<=0.75*self.width+2.5*self.cell_size and y>=self.height+self.height*0.075 and y <= self.height+self.height*0.1+ 1.5*self.cell_size
     def reset_grid(self):
         for row in range(self.grid_height):
             for col in range(self.grid_width):
