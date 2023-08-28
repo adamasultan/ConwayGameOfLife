@@ -12,3 +12,7 @@ Conway's Game of Life is a simulation that has a few simple rules.
 7. Any dead cell with exactly 3 alive neighbors, becomes alive
 
 This is a game where the user can input any combination alive or dead cells and simulate multiple generations of the Game of Life.
+
+How to run:
+
+Pull all of the src files into the same folder. Simply run game.py to start the game.
