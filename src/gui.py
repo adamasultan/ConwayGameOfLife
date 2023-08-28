@@ -27,7 +27,7 @@ class Gui():
         pygame.draw.rect(self.screen, self.GREY, ((0,self.height),(self.width, self.height)))
         self.__draw_start()
         self.__draw_reset()
-        self.__draw_stop()
+        #self.__draw_stop()
         self.__draw_next() 
 
     def __draw_rect(self,color, row, col):
@@ -40,8 +40,8 @@ class Gui():
         pygame.draw.rect(self.screen, self.GREEN, ((0.15*self.width, self.height+self.height*0.075), (2.5*self.cell_size, 1.5*self.cell_size)))
         self.draw_text("Reset", self.reset_text_font, (0,0,0), 0.17*self.width, self.height+self.height*0.09)
     def __draw_stop(self):
-        pygame.draw.rect(self.screen, self.RED, ((0.65*self.width, self.height+self.height*0.1), (2*self.cell_size, self.cell_size)))
-        self.draw_text("Stop", self.stop_and_next_text_font, (0,0,0), 0.68*self.width, self.height+self.height*0.11)
+        pygame.draw.rect(self.screen, self.RED, ((0.4*self.width, self.height+self.height*0.05), (4*self.cell_size, 2*self.cell_size)))
+        self.draw_text("Stop", self.start_text_font, (0,0,0), 0.46*self.width, self.height+self.height*0.08)
     def __draw_next(self):
         pygame.draw.rect(self.screen, self.GREEN, ((0.82*self.width, self.height+self.height*0.1), (2*self.cell_size, self.cell_size)))
         self.draw_text("Next", self.stop_and_next_text_font, (0,0,0), 0.85*self.width, self.height+self.height*0.11)
@@ -93,6 +93,7 @@ class Gui():
                     col = x//self.cell_size
                     self.on_cell_press(row, col)
                 if self.__in_start_button_range(x,y):
+                    self.__draw_stop()
                     started = True
                     while started:
                         self.on_next_gen_press()
@@ -101,7 +102,8 @@ class Gui():
                         for event in pygame.event.get():
                             if event.type == pygame.MOUSEBUTTONDOWN:
                                 z,z1 = pygame.mouse.get_pos()
-                                if self.__in_stop_button_range(z,z1):
+                                if self.__in_start_button_range(z,z1):
+                                    self.__draw_start()
                                     started = False
                                 if self.__in_reset_button_range(z,z1):
                                     started = False
